@@ -66,6 +66,15 @@ class Analyzer:
         df = pd.DataFrame(self.bin_dict, columns=self.events)
         print(df.loc[(df == 0).all(axis=0)].columns)
         
+    def sanitize(self):
+        self.df = pd.DataFrame(self.data_points, columns=self.events)
+        self.df = self.df.drop('Generic event', axis=1)
+        self.df = self.df.drop('Generic', axis=1)
+        self.df['Spooky Action'] = self.df['Spooky Action'] + self.df['Spooky Action: The Drama of Quantum Mechanics']
+        self.df = self.df.drop['Spooky Action: The Drama of Quantum Mechanics']
+        self.df = self.df.loc[(self.df != 0).any(axis=0)]
+        self.df = self.df.loc[:, (self.df != 0).any(axis=1)]
+        
     def print_clusters(self, df=self.df, labels):
         for i in range(len(np.unique(labels))):
             print("Cluster {}\n".format(i))
